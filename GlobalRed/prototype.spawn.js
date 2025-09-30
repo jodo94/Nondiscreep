@@ -221,29 +221,7 @@ module.exports = function() {
             var movepartsPioneers = Math.floor((energy-150) / 50);
             
             var body = [];
-            
-            
-            
-                
-            //miner does not exist in main    
-            if (roleName =='miner'){
-                if (numberOfParts <= 5){
-                    for (let i = 0; i < numberOfParts; i++) {
-                        body.push(WORK); 
-                        body.push(MOVE);
-                        body.push(CARRY);
-                    }
-                }
-                else {
-                    for (let i = 0; i < 5; i++) {
-                        body.push(WORK); 
-                        body.push(MOVE);
-                        body.push(CARRY);
-                    }
-                }
-            }
-            
-            else if (roleName == 'warrior'){
+            if (roleName == 'warrior'){
                 for (let i = 0; i <  numberOfParts; i++){
                     body.push(MOVE);
                     body.push(ATTACK);
@@ -254,13 +232,27 @@ module.exports = function() {
             }
             else if (roleName == 'exterminator'){
                 for (let i = 4; i <  numberOfParts; i++){
-                    body.push(MOVE);
-                    body.push(ATTACK);
                     body.push(TOUGH);
                     body.push(TOUGH);
                 }
+                for (let i = 4; i <  numberOfParts; i++){
+                    body.push(MOVE);
+                    body.push(ATTACK);
+                }
                 body.push(CLAIM);
-                body.push(WORK);
+                
+            }
+            else if (roleName == 'quadsquad'){
+                for (let i=4; i < numberOfParts; i++){
+                    body.push(MOVE);
+                    
+                    
+                }
+                for (let i=4; i < numberOfParts; i++){
+                    body.push(RANGED_ATTACK);
+                }
+         
+                body.push(HEAL);
             }
             else if (roleName =='gaurd'){
                 for (let i = 0; i < numberOfParts; i++) {
@@ -287,14 +279,28 @@ module.exports = function() {
             
             
             else if(roleName != 'logistics' && roleName !='claim' && roleName != 'warrior'){
-                for (let i = 0; i < numberOfParts; i++) {
-                        body.push(WORK); 
+                    if (numberOfParts > 5){
+                        let numberOfParts = 5;
+                        for (let i = 0; i < numberOfParts; i++) {
+                            body.push(WORK); 
+                        }
+                        for (let i = 0; i < numberOfParts; i++) {
+                                body.push(CARRY);
+                        }
+                        for (let i = 0; i < numberOfParts; i++) {
+                                body.push(MOVE);
+                        }
                     }
-                for (let i = 0; i < numberOfParts; i++) {
-                        body.push(CARRY);
-                    }
-                for (let i = 0; i < numberOfParts; i++) {
-                        body.push(MOVE);
+                    else{
+                        for (let i = 0; i < numberOfParts; i++) {
+                                body.push(WORK); 
+                        }
+                        for (let i = 0; i < numberOfParts; i++) {
+                                body.push(CARRY);
+                        }
+                        for (let i = 0; i < numberOfParts; i++) {
+                                body.push(MOVE);
+                        }
                     }
             }
 

@@ -31,7 +31,7 @@ module.exports = {
             
             let sizeOfLaborForce = _.sum(Game.creeps, (c) => (c.memory.role =='builder' || c.memory.role == 'harvester' || c.memory.role == 'repairer' || c.memory.role == 'upgrader') && c.room.name === roomName);
             let numberEmployed = _.sum(Game.creeps, (c) => (c.memory.role =='builder' || c.memory.role == 'harvester' || c.memory.role == 'repairer' || c.memory.role == 'upgrader')&& c.room.name === roomName && c.store.getUsedCapacity(RESOURCE_ENERGY) >= 5);
-                
+            let numberOfGaurds = _.sum(Game.creeps, (c) => (c.memory.role =='gaurd' && c.room.name === roomName));
             let EmploymentRatio = numberEmployed/sizeOfLaborForce;
                 // Update and get the SMAER
             SMAER.update(roomName,EmploymentRatio);
@@ -67,14 +67,16 @@ module.exports = {
             /*SPAWNING LOGIC*/
             
             
-            if (hostiles.length > 0 && room.find(FIND_MY_STRUCTURES, { filter: { structureType: STRUCTURE_TOWER } }).length === 0) {
+            if (hostiles.length > 0 && room.find(FIND_MY_STRUCTURES, { filter: { structureType: STRUCTURE_TOWER } }).length === 0  &&  numberOfGaurds < 3) {
                     spawn.createCustomCreep(discretionaryEnergy, 'gaurd');
                 }
-            
            
-            if (youngestCreep.ticksToLive > 1400 && energy > 2000 && Memory.numberOfExterminators < 1){
-                spawn.createCustomCreep(energy, 'exterminator');
+            let sizeOfQuadSquad = _.sum(Game.creeps, (c) => (c.memory.role == 'quadsquad'));
+            if (youngestCreep.ticksToLive > 1200 && energy > 2000 && sizeOfQuadSquad < 4){
+                spawn.createCustomCreep(energy, 'quadsquad');
             }
+            
+            
 
             
             
@@ -95,10 +97,10 @@ module.exports = {
                 console.log('goalpostStorage: ' +Memory.goalpostStorage);
             }
                 
-            if (((SMAERResult > goalpostBirth)|| youngestCreep.ticksToLive < 800)){// && creepsInRoom.length <13) {
+            if (((SMAERResult > goalpostBirth))){//|| (youngestCreep.ticksToLive < 800 && creepsInRoom.length <2)) {
                     spawn.createCustomCreep(energy, 'harvester');
                 }
-            if (sizeOfLaborForce <2){
+            if (sizeOfLaborForce <1){
                     spawn.createCustomCreep(discretionaryEnergy, 'harvester');
                 }
         }

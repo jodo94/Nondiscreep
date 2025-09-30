@@ -7,11 +7,7 @@ module.exports = {
         
         const targetRoom =  creep.room.name;
         // A simple way to get the resource type the creep is carrying.
-        // This assumes the creep carries only one resource type at a time.
-        let resourceToTransfer = Object.keys(creep.store).find(resource => creep.store[resource] > 0);
-
-        
-        
+ 
         
         
         

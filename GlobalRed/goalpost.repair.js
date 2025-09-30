@@ -18,8 +18,8 @@ module.exports = {
                 Memory.goalpostRepair =30000000;
             }
             else{
-                //Memory.goalpostRepair=1000000;
-                Memory.goalpostRepair= Math.floor((Memory.Epoch*3600))+ 10000;
+
+               Memory.goalpostRepair =30000000;
             }
     }
 };

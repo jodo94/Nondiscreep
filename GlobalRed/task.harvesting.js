@@ -18,9 +18,9 @@ module.exports = {
                 // the second argument for findClosestByPath is an object which takes
                 // a property called filter which can be a function
                 // we use the arrow operator to define it
-                filter: (s) => (((s.structureType == STRUCTURE_STORAGE) 
+                filter: (s) => ((s.structureType == STRUCTURE_STORAGE) 
                              && (s.store.getFreeCapacity(RESOURCE_ENERGY) < (1000000)))
-                             || (s.structureType == STRUCTURE_CONTAINER && s.store.getFreeCapacity(RESOURCE_ENERGY) < 2000))
+                    
             });
         
         
@@ -34,8 +34,8 @@ module.exports = {
                 creep.say('gimme');
             }
         }
-       
-        else if (storage != null  && (creep.memory.role != 'harvester') && (!source || source === null || source == "undefined")) {
+        // && creep.ticksToLive < 150 
+        else if (storage != null&& (creep.memory.role != 'harvester') && (source != null || source != 'undefined' || !source)) {
             // Try to withdraw energy from the storage. If it's not in range...
             if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 // ...move to the storage.
@@ -44,7 +44,11 @@ module.exports = {
             }
         }
         
- 
+         
+        else if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
+            // ...then move towards that source.
+            creep.moveTo(source, {visualizePathStyle: {stroke: '#ffff00'}});
+        }
         
         // If the creep has a source and can't harvest it because it's out of range...
         else if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
