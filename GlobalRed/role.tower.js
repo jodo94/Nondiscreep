@@ -11,14 +11,19 @@ module.exports = {
         });
 
         // if there are hostiles - attack them
-        if (hostiles.length > 0) {
+        if (hostiles.length > 1) { // Check if there are at least two creeps
+            var username = hostiles[1].owner.username;
+            Game.notify(`User ${username} spotted in room ${myRoomName}`);
+            towers.forEach(tower => tower.attack(hostiles[1])); // Attack the second creep
+            console.log("ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ");
+            return;
+        } else if (hostiles.length > 0) { // If there is only one creep
             var username = hostiles[0].owner.username;
             Game.notify(`User ${username} spotted in room ${myRoomName}`);
-            towers.forEach(tower => tower.attack(hostiles[0]));
+            towers.forEach(tower => tower.attack(hostiles[0])); // Attack the first (and only) creep
             console.log("ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ALERT!!!! WE ARE UNDER ATTACK!!!!! ");
             return;
         }
-
         // if there are no hostiles....
         if (hostiles.length === 0) {
 
