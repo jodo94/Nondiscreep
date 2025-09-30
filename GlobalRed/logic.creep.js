@@ -19,6 +19,8 @@ var tower = require('role.tower');
 var roleGaurd = require('role.gaurd');
 var roleMiner = require('role.miner');
 var roleQuadSquad = require('role.quadsquad');
+var roleGuerrilla = require('role.guerrilla');
+var roleDecoy = require('role.decoy');
 module.exports = {
  // Run the logic for each creep.
     run: function(){
@@ -27,9 +29,9 @@ module.exports = {
             const creep = Game.creeps[name];
             
     
-            if (creep.ticksToLive == 1000 &&  (creep.memory.role =='builder' || creep.memory.role == 'harvester' || creep.memory.role == 'repairer')) {
+            if (creep.ticksToLive == 1000 &&  (creep.memory.role =='builder' || creep.memory.role == 'harvester' || creep.memory.role == 'repairer') && creep.roomName == 'E42S55') {
                 creep.memory.role = 'repairer';
-            } else if (creep.ticksToLive == 75 &&  (creep.memory.role =='builder' || creep.memory.role == 'harvester' || creep.memory.role == 'repairer')) {
+            } else if (creep.ticksToLive == 200 &&  (creep.memory.role =='builder' || creep.memory.role == 'harvester' || creep.memory.role == 'repairer')) {
                 creep.memory.role = 'upgrader';
             }
             
@@ -54,6 +56,10 @@ module.exports = {
                 roleExterminator.run(creep);
             } else if (creep.memory.role === 'quadsquad') {
                 roleQuadSquad.run(creep);
+            } else if (creep.memory.role === 'decoy') {
+                roleDecoy.run(creep);
+            } else if (creep.memory.role === 'guerrilla') {
+                roleGuerrilla.run(creep);
             } else if (creep.memory.role === 'claim') {
                 roleClaimer.run(creep);
             } else if (creep.memory.role === 'pioneer') {

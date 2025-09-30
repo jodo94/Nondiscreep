@@ -15,8 +15,9 @@ module.exports.loop = function () {
         }
     }
 
-
-
+    Memory.targetRoomName = 'E48S53';
+    Memory.buildRoomName = 'E43S55';
+    Memory.claimRoomName = 'E42S54';
     // Run the logic for each room.
     roomLogic.run();
 

@@ -23,18 +23,18 @@ module.exports = {
                     
             });
         
-        
+        //&& ( creep.memory.role != 'harvester')
         
         // If there is dropped energy nearby...
         if (dropenergy && ( creep.memory.role != 'harvester')){
             // ...try to pick it up. If it's not in range...
-            if (creep.pickup(dropenergy) == ERR_NOT_IN_RANGE) {
+            if (creep.pickup(dropenergy && ( creep.memory.role != 'harvester')) == ERR_NOT_IN_RANGE) {
                 // ...move towards the dropped energy.
                 creep.moveTo(dropenergy, {visualizePathStyle: {stroke: '#ffffff'}});
                 creep.say('gimme');
             }
         }
-        // && creep.ticksToLive < 150 
+/*
         else if (storage != null&& (creep.memory.role != 'harvester') && (source != null || source != 'undefined' || !source)) {
             // Try to withdraw energy from the storage. If it's not in range...
             if (creep.withdraw(storage, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -42,8 +42,8 @@ module.exports = {
                 creep.moveTo(storage);
             
             }
-        }
-        
+        } 
+*/
          
         else if (creep.harvest(source) == ERR_NOT_IN_RANGE) {
             // ...then move towards that source.

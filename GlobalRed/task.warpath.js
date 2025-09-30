@@ -5,9 +5,9 @@ module.exports = {
    run: function(creep) {
         // The final destination you want the creep to reach.
         // It will path through all necessary rooms on its own.
-        const finalDestination = new RoomPosition(25, 25, 'E43S56');
-        creep.move(BOTTOM);
-        //creep.move(RIGHT);
+        const finalDestination = new RoomPosition(25, 25, 'E43S55');
+        
+        creep.move(RIGHT);
         
         if (creep.room.name !== finalDestination.roomName) {
             // Tell the creep to move to the final destination.

@@ -230,6 +230,19 @@ module.exports = function() {
                 }
                 
             }
+            else if (roleName ==  'decoy'){
+                body.push(MOVE);
+                body.push(ATTACK);
+            }
+            else if (roleName == 'guerrilla'){
+                for (let i = 0; i <  numberOfParts; i++){
+                    body.push(TOUGH);
+                    body.push(MOVE);
+                    body.push(MOVE);
+                }
+                
+                body.push(ATTACK);
+            }
             else if (roleName == 'exterminator'){
                 for (let i = 4; i <  numberOfParts; i++){
                     body.push(TOUGH);
@@ -277,21 +290,10 @@ module.exports = function() {
                 body.push(CLAIM);
             }
             
+
             
             else if(roleName != 'logistics' && roleName !='claim' && roleName != 'warrior'){
-                    if (numberOfParts > 5){
-                        let numberOfParts = 5;
-                        for (let i = 0; i < numberOfParts; i++) {
-                            body.push(WORK); 
-                        }
-                        for (let i = 0; i < numberOfParts; i++) {
-                                body.push(CARRY);
-                        }
-                        for (let i = 0; i < numberOfParts; i++) {
-                                body.push(MOVE);
-                        }
-                    }
-                    else{
+
                         for (let i = 0; i < numberOfParts; i++) {
                                 body.push(WORK); 
                         }
@@ -301,7 +303,7 @@ module.exports = function() {
                         for (let i = 0; i < numberOfParts; i++) {
                                 body.push(MOVE);
                         }
-                    }
+                    
             }
 
             // create creep with the created body and the given role
