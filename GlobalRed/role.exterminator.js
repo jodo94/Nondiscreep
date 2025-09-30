@@ -130,7 +130,7 @@ module.exports = {
         };
 
         // --- Configuration ---
-        const targetRoomName = 'E43S55';
+        const targetRoomName = Memory.claimRoomName;
 
         // --- Phase 1: Travel to Target Room ---
         if (creep.room.name !== targetRoomName) {

@@ -72,14 +72,27 @@ module.exports = {
                 }
            
             let sizeOfQuadSquad = _.sum(Game.creeps, (c) => (c.memory.role == 'quadsquad'));
-            if (youngestCreep.ticksToLive > 1200 && energy > 2000 && sizeOfQuadSquad < 4){
+            
+            //if (youngestCreep.ticksToLive > 1400 && energy > 2000 && Memory.numberOfExterminators < 1){
+                //spawn.createCustomCreep(energy, 'pioneer');
+            //}
+            if (youngestCreep.ticksToLive > 1200 && Memory.QSMode == 0 &&  energy > 2000 && sizeOfQuadSquad < 4){
                 spawn.createCustomCreep(energy, 'quadsquad');
             }
-            
-            
-
-            
-            
+            let numberOfDecoys = _.sum(Game.creeps, (c) => (c.memory.role == 'decoy'));
+            if (Game.time % (75 * (2**numberOfDecoys))==0) {spawn.createCustomCreep(discretionaryEnergy, 'decoy');
+            }
+            /*
+            if(Game.time % 750 == 0){
+                if(Game.time % 1500 ==0){
+                spawn.createCustomCreep(discretionaryEnergy, 'guerrilla');
+                }
+                else{
+                     spawn.createCustomCreep(discretionaryEnergy, 'decoy');
+                }
+            }
+            */
+             
             if (Game.time % 3 == 0){
                 console.log(" ");
                 console.log(" ");
@@ -97,9 +110,10 @@ module.exports = {
                 console.log('goalpostStorage: ' +Memory.goalpostStorage);
             }
                 
-            if (((SMAERResult > goalpostBirth))){//|| (youngestCreep.ticksToLive < 800 && creepsInRoom.length <2)) {
+            if ((SMAERResult > goalpostBirth)  || (youngestCreep.ticksToLive < 800 && creepsInRoom.length <2)) {
                     spawn.createCustomCreep(energy, 'harvester');
                 }
+            
             if (sizeOfLaborForce <1){
                     spawn.createCustomCreep(discretionaryEnergy, 'harvester');
                 }

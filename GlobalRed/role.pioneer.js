@@ -6,16 +6,18 @@
  * var mod = require('role.pioneer');
  * mod.thing == 'a thing'; // true
  */
-var warpath = require('task.warpath');
+var devpath = require('task.devpath');
 module.exports = {
         run: function(creep){   
-            let targetRoom = 'E43S56';
+            let targetRoom = Memory.buildRoomName;
         
-           
+            creep.move(BOTTOM);
             if (creep.room.name != targetRoom) {
-                warpath.run(creep);
+                devpath.run(creep);
+                
             }
             else{
+                
                 creep.move(BOTTOM);
                 creep.memory.role = 'builder'; 
             }

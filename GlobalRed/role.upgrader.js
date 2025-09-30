@@ -22,7 +22,6 @@ module.exports = {
             creep.memory.working = false;
             SMADS.push(creep);
             creep.memory.working = false;
-            creep.say('UWU');
         }
         else if (creep.memory.working === false && (creep.store.getFreeCapacity(RESOURCE_ENERGY) === 0))  {
             creep.memory.working = true;
